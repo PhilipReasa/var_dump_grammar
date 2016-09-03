@@ -10,11 +10,16 @@ start_values = object / array
  * The object!
  *************/
 //example: object(foo)#1 (1) { ["key"]=> int(1) }
-object = object_constant_text "(" objectType:object_name ")" "#" objectReference:object_reference ws "(" propertyCount:object_field_count ")" ws "{"
- ws values:object_key_value* ws "}" {return {type:objectType, reference:objectReference, properties:propertyCount, values:values }}
+object = object_constant_text "(" objectType:fully_qualified_object_name ")" "#" objectReference:object_reference ws "(" propertyCount:object_field_count ")" ws "{"
+ ws values:object_key_value* ws "}" {return {type:"object", className:objectType, reference:objectReference, properties:propertyCount, values:values }}
 
 //all objects start with the string "object"
 object_constant_text = "object"
+
+//object name including classes
+fully_qualified_object_name = namespace:namespace_name* classname:object_name {return namespace.join('') + classname }
+
+namespace_name = name:object_name "\\" { return name + "\\" }
 
 //object names start with a letter/underscore, followed by a combination of letters, underscores, and numbers
 object_name = firstChar:[a-zA-Z_] otherChars:[a-zA-Z_0-9]* {return firstChar + otherChars.join('')}
@@ -43,7 +48,7 @@ object_property_scope = "private" / "protected" / "public"
  * The array!
  ************/
 //example: array(1) { ["key"]=> int(1) }
-array = ws array_constant_text "(" count:array_field_count ") {" values:array_key_value* ws "}" ws {return {count: count, values: values}}
+array = ws array_constant_text "(" count:array_field_count ") {" values:array_key_value* ws "}" ws {return {type: "array", count: count, values: values}}
 
 //all arrays start with this text
 array_constant_text = "array"
@@ -80,7 +85,7 @@ primitives = string
  * Strings
  **************/
 //strings provide some extra data: string(length) "value"
-string = ws string_constant_text "(" string_length ")" ws quotation_mark chars:char* quotation_mark ws { return chars.join(""); }
+string = ws string_constant_text "(" string_length ")" ws quotation_mark chars:char* quotation_mark ws { return { type:"string", value: chars.join("") }; }
 
 string_constant_text = "string"
 
@@ -98,15 +103,17 @@ unescaped      = [^\0-\x1F\x22\x5C]
  ****************/
 boolean = TRUE / FALSE
 
-TRUE = "bool(true)"
+TRUE = "bool(true)" { return {type:"boolean", value: true}; }
 
-FALSE = "bool(false)"
+FALSE = "bool(false)" { return {type:"boolean", value: false}; }
 
-integer = "int(" sign:"-"? number:simple_number ")" { return (sign || "") + number }
+integer = "int(" sign:"-"? number:simple_number ")" { return { type:"integer", value: (sign || "") + number } }
 
-float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* ")" { return (sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join('') }
+float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* ")" { return { type:"float", value: (sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join('') }; }
 
-null = "NULL"
+null = "NULL" { return { type: "NULL", value: "null" }; }
+
+recursion = "*RECURSION*" { return { type: "RECURSION", value: "recursion" }; }
 
 /********************
  * Helpers
