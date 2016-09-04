@@ -17,9 +17,9 @@ object = object_constant_text "(" objectType:fully_qualified_object_name ")" "#"
 object_constant_text = "object"
 
 //object name including classes
-fully_qualified_object_name = namespace:namespace_name* classname:object_name {return namespace.join('') + classname }
+fully_qualified_object_name = namespace:namespace_name* classname:object_name {return { namespace: namespace, class: classname }; }
 
-namespace_name = name:object_name "\\" { return name + "\\" }
+namespace_name = name:object_name "\\" { return name }
 
 //object names start with a letter/underscore, followed by a combination of letters, underscores, and numbers
 object_name = firstChar:[a-zA-Z_] otherChars:[a-zA-Z_0-9]* {return firstChar + otherChars.join('')}
@@ -34,12 +34,10 @@ object_field_count = simple_number
 object_key_value = ws "[" key:object_key "]=>" ws value:value ws {return  {property:key, value:value}}
 
 //keys are quoted, colon seperated, strings with an optional scope at the end
-object_key = propertyString:object_property+ propertScope:object_property_scope? {return propertyString.join('') + (propertScope || "") }
+object_key = propertyString:object_property+ propertScope:object_property_scope? {return { propertyChain: propertyString, propertScope: propertScope } }
 
 //quoted colon seperated strings
-object_property = quotation_mark objectText:object_sub_property quotation_mark colon:":"? {return objectText + (colon || "") }
-
-object_sub_property = variable
+object_property = quotation_mark objectText:variable quotation_mark ":"? {return objectText }
 
 //potential properties
 object_property_scope = "private" / "protected" / "public"
@@ -57,7 +55,7 @@ array_constant_text = "array"
 array_field_count = simple_number
 
 //the key value part: ["key"]=> int(1)
-array_key_value = ws "[" key:array_key "]=>" ws value:value ws { return {key: key, value: value }}
+array_key_value = ws key:array_key ws value:value ws { return {key: key, value: value }}
 
 //array keys are numbers or strings
 array_key = array_key_number / array_key_string
@@ -82,6 +80,7 @@ primitives = string
 	/ integer
 	/ float
 	/ null
+    / recursion
 
 /**************
  * Strings
@@ -104,9 +103,9 @@ TRUE = "bool(true)" { return {type:"boolean", value: true}; }
 
 FALSE = "bool(false)" { return {type:"boolean", value: false}; }
 
-integer = "int(" sign:"-"? number:simple_number ")" { return { type:"integer", value: (sign || "") + number } }
+integer = "int(" sign:"-"? number:simple_number ")" { return { type:"integer", value: parseInt((sign || "") + number) } }
 
-float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* ")" { return { type:"float", value: (sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join('') }; }
+float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* ")" { return { type:"float", value: parseFloat((sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join('')) }; }
 
 null = "NULL" { return { type: "NULL", value: "null" }; }
 
