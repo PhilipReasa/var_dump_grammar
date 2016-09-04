@@ -63,7 +63,7 @@ array_key = array_key_number / array_key_string
 //array key strings are wrapped with quotes    
 array_key_string = "[" quotation_mark chars:array_key_string_char* quotation_mark "]=>" { return chars.join(""); }
 
-array_key_string_char = [^\"] / [\"][^\]] / [\"][\]][^=] / [\"][\]][=][^>]
+array_key_string_char = value:[^\"] / value:([\"][^\]]) / value:([\"][\]][^=]) / value:([\"][\]][=][^>]) {return value.join('')}
 
 //array index's can be any integer
 array_key_number = "[" sign:"-"? number:simple_number "]=>" { return (sign || "") + number }
