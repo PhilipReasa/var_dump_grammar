@@ -31,7 +31,7 @@ object_reference = simple_number
 object_field_count = simple_number
 
 //objects contain key->value pairs
-object_key_value = ws "[" key:object_key "]=>" ws value:value ws {return  {key:key, value:value}}
+object_key_value = ws "[" key:object_key "]=>" ws value:value ws {return  {property:key, value:value}}
 
 //keys are quoted, colon seperated, strings with an optional scope at the end
 object_key = propertyString:object_property+ propertScope:object_property_scope? {return propertyString.join('') + (propertScope || "") }
@@ -39,7 +39,7 @@ object_key = propertyString:object_property+ propertScope:object_property_scope?
 //quoted colon seperated strings
 object_property = quotation_mark objectText:object_sub_property quotation_mark colon:":"? {return objectText + (colon || "") }
 
-object_sub_property = chars:char* { return chars.join('') }
+object_sub_property = variable
 
 //potential properties
 object_property_scope = "private" / "protected" / "public"
@@ -63,10 +63,12 @@ array_key_value = ws "[" key:array_key "]=>" ws value:value ws { return {key: ke
 array_key = array_key_number / array_key_string
     
 //array key strings are wrapped with quotes    
-array_key_string = quotation_mark chars:char* quotation_mark { return chars.join(""); }
+array_key_string = "[" quotation_mark chars:array_key_string_char* quotation_mark "]=>" { return chars.join(""); }
+
+array_key_string_char = [^\"] / [\"][^\]] / [\"][\]][^=] / [\"][\]][=][^>]
 
 //array index's can be any integer
-array_key_number = sign:"-"? number:simple_number { return (sign || "") + number }
+array_key_number = "[" sign:"-"? number:simple_number "]=>" { return (sign || "") + number }
 
 /*************
  * Three main types of values: Objects, arrays, and primitives
@@ -85,18 +87,13 @@ primitives = string
  * Strings
  **************/
 //strings provide some extra data: string(length) "value"
-string = ws string_constant_text "(" string_length ")" ws quotation_mark chars:char* quotation_mark ws { return { type:"string", value: chars.join("") }; }
+string = ws string_constant_text "(" length:string_length ")" ws quotation_mark chars:string_char* quotation_mark ws { return { type:"string", length:length, value: chars.join("") }; }
 
 string_constant_text = "string"
 
 string_length = simple_number
 
-char
-  = unescaped
-  / escape
-
-escape         = "\\"
-unescaped      = [^\0-\x1F\x22\x5C]
+string_char = [^\"] / [\"][^\n]
 
 /****************
  * Other Primitives
@@ -114,6 +111,8 @@ float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* ")" 
 null = "NULL" { return { type: "NULL", value: "null" }; }
 
 recursion = "*RECURSION*" { return { type: "RECURSION", value: "recursion" }; }
+
+variable = varaibleNameFirst:[a-zA-Z_\x7f-\xff] variableNameOthers:[a-zA-Z0-9_\x7f-\xff]* { return varaibleNameFirst + variableNameOthers.join(''); } 
 
 /********************
  * Helpers
