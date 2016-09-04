@@ -34,7 +34,7 @@ object_field_count = simple_number
 object_key_value = ws "[" key:object_key "]=>" ws value:value ws {return  {property:key, value:value}}
 
 //keys are quoted, colon seperated, strings with an optional scope at the end
-object_key = propertyString:object_property+ propertScope:object_property_scope? {return { propertyChain: propertyString, propertScope: propertScope } }
+object_key = propertyString:object_property+ propertyScope:object_property_scope? {return { propertyChain: propertyString, propertyScope: propertyScope } }
 
 //quoted colon seperated strings
 object_property = quotation_mark objectText:variable quotation_mark ":"? {return objectText }
