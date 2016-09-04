@@ -7,7 +7,7 @@ VAR_DUMP = ws dump:start_values ws {return dump}
 start_values = object / array
 
 /**************
- * The object
+ * PHP objects
  *************/
 //example: object(Namespace\foo)#1 (1) { ["key"]=> int(1) }
 object = 
@@ -55,7 +55,7 @@ object_field_count = simple_number
 
 //objects contain key->value pairs
 object_key_value = 
-	ws "[" key:object_key "]=>" 
+	ws "[" key:object_key "]=&gt;" 
 	ws value:value ws 
 {
 	return  {
@@ -91,7 +91,7 @@ object_property_scope =
 	"public"
 
 /************
- * The array!
+ * PHP arrays
  ************/
 //example: array(1) { ["key"]=> int(1) }
 array = 
@@ -131,13 +131,16 @@ array_key =
 array_key_string = 
 	"[" quotation_mark 				//["
 	chars:array_key_string_char* 	//key
-	quotation_mark+ "]=>" 			//"]=>
+	quotation_mark+ "]=&gt;" 		//"]=>
 { 
 	return chars.join(""); 
 }
 
 array_key_string_char = 
-	values:([\"][\]][=][^>]) / 
+	values:([\"][\]][=][&][g][t][^;]) / 
+	values:([\"][\]][=][&][g][^t]) /
+	values:([\"][\]][=][&][^g]) /
+	values:([\"][\]][=][^&]) /
 	values:([\"][\]][^=]) / 
 	values:([\"][^\]]) / 
 	values:[^\"]+ 
@@ -150,7 +153,7 @@ array_key_number =
 	"[" 					//[
 	sign:"-"? 				//-
 	number:simple_number 	//1
-	"]=>" 					//]=>
+	"]=&gt;" 				//]=>
 { 
 	return parseInt((sign || "") + number);
 }
