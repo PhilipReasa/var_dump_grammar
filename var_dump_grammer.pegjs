@@ -137,15 +137,47 @@ array_key_string =
 }
 
 array_key_string_char = 
-	values:([\"][\]][=][&][g][t][^;]) / 
-	values:([\"][\]][=][&][g][^t]) /
-	values:([\"][\]][=][&][^g]) /
-	values:([\"][\]][=][^&]) /
-	values:([\"][\]][^=]) / 
-	values:([\"][^\]]) / 
-	values:[^\"]+ 
-{ 
-	return values.join(''); 
+	array_key_string_char_type1 /
+	array_key_string_char_type2 / 
+	array_key_string_char_type3 / 
+	array_key_string_char_type4 /
+	array_key_string_char_type5 /
+	array_key_string_char_type6 /
+	array_key_string_char_type7
+
+array_key_string_char_type1 = [\"][\]][=][&][g][t] val:[^;]
+{
+	return "\"]=&gt" + val;
+}
+
+array_key_string_char_type2 = [\"][\]][=][&][g] val:[^t]
+{
+	return "\"]=&g" + val;
+}
+
+array_key_string_char_type3 = [\"][\]][=][&] val:[^g]
+{
+	return "\"]=&" + val;
+}
+
+array_key_string_char_type4 = [\"][\]][=] val:[^&]
+{
+	return "\"]=" + val;
+}
+
+array_key_string_char_type5 = [\"][\]] val:[^=]
+{
+	return "\"]" + val;
+}
+
+array_key_string_char_type6 = [\"] val:[^\]]
+{
+	return "\"" + val;
+}
+
+array_key_string_char_type7 = values:[^\"]+
+{
+	return values.join('');
 }
 
 //array index's can be any integer
@@ -247,7 +279,7 @@ integer = "int(" sign:"-"? number:simple_number ")" { return { type:"integer", v
 
 float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* ")" { return { type:"float", value: parseFloat((sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join('')) }; }
 
-null = "NULL" { return { type: "NULL", value: "null" }; }
+null = "NULL" { return { type: "null", value: "NULL" }; }
 
 recursion = "*RECURSION*" { return { type: "RECURSION", value: "recursion" }; }
 
