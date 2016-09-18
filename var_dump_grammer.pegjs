@@ -75,14 +75,24 @@ object_key =
 	};
 }
 
-//quoted colon seperated strings
+//quoted colon seperated strings (possibly including namespace slashes)
 object_property = 
 	quotation_mark 
-	objectText:variable 
+	value:slashOrVariable+
 	quotation_mark ":"? 
 {
-	return objectText;
+	return value.join('');
 }
+
+slashOrVariable = nameSpaceSlash:"\\"? objectText:variable 
+{
+	if(nameSpaceSlash !== null) {
+		return nameSpaceSlash + objectText;
+	} else {
+		return objectText;
+	} 
+}
+
 
 //potential properties
 object_property_scope = 
