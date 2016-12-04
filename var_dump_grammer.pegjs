@@ -281,19 +281,62 @@ string_chars_type3 = values:[^\"]+
  ****************/
 boolean = TRUE / FALSE
 
-TRUE = "bool(true)" { return {type:"boolean", value: true}; }
+TRUE = "bool(true)" 
+{ 
+	return {
+		type:"boolean", 
+		value: true
+	}; 
+}
 
-FALSE = "bool(false)" { return {type:"boolean", value: false}; }
+FALSE = "bool(false)" 
+{ 
+	return {
+		type:"boolean", 
+		value: false
+	}; 
+}
 
-integer = "int(" sign:"-"? number:simple_number ")" { return { type:"integer", value: parseInt((sign || "") + number) } }
+integer = "int(" sign:"-"? number:simple_number ")" 
+{ 
+	return { 
+		type:"integer", 
+		value: parseInt((sign || "") + number) 
+	} 
+}
 
-float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* ")" { return { type:"float", value: parseFloat((sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join('')) }; }
+float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* sientificNotation:"E"? sientificNotationSign:[+\-]? sientificNotationDignits:[0-9]* ")" 
+{ 
+	var value = parseFloat((sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join(''));
+	if(sientificNotation) {
+		value += "E" + sientificNotationSign + sientificNotationDignits.join('');
+	}
+	return { 
+		type:"float", 
+		value: value
+	}; 
+}
 
-null = "NULL" { return { type: "null", value: "NULL" }; }
+null = "NULL" 
+{ 
+	return { 
+		type: "null", 
+		value: "NULL" 
+	}; 
+}
 
-recursion = "*RECURSION*" { return { type: "RECURSION", value: "recursion" }; }
+recursion = "*RECURSION*" 
+{ 
+	return { 
+		type: "RECURSION", 
+		value: "recursion" 
+	}; 
+}
 
-variable = varaibleNameFirst:[a-zA-Z_\x7f-\xff] variableNameOthers:[a-zA-Z0-9_\x7f-\xff]* { return varaibleNameFirst + variableNameOthers.join(''); } 
+variable = varaibleNameFirst:[a-zA-Z_\x7f-\xff] variableNameOthers:[a-zA-Z0-9_\x7f-\xff]* 
+{ 
+	return varaibleNameFirst + variableNameOthers.join(''); 
+} 
 
 /********************
  * Helpers
