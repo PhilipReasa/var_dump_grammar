@@ -10,3 +10,6 @@ node_modules/
 
 # Platform
 .DS_STORE
+
+# Php files are almost always test files
+*.php

@@ -112,7 +112,7 @@ array =
 {
 	return {
 		type: "array", 
-		count: count, 
+		count: parseInt(count),
 		values: values
 	}
 }

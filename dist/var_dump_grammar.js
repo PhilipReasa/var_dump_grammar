@@ -218,7 +218,7 @@
         peg$c41 = function(count, values) {
         	return {
         		type: "array", 
-        		count: count, 
+        		count: parseInt(count),
         		values: values
         	}
         },
