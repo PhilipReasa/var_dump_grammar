@@ -1,0 +1,33 @@
+{
+  "name": "var_dump_grammar",
+  "version": "1.0.0",
+  "description": "a formal grammar for var dumps",
+  "main": "var_dump_grammer.js",
+  "dependencies": {
+    "pegjs": "^0.10.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rece/var_dump_grammar.git"
+  },
+  "keywords": [
+    "var",
+    "dump",
+    "var_dump",
+    "php",
+    "grammar"
+  ],
+  "author": "Philip Reasa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rece/var_dump_grammar/issues"
+  },
+  "homepage": "https://github.com/Rece/var_dump_grammar#readme"
+}
