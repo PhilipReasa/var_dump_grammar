@@ -19,8 +19,8 @@ object =
 	return {
 		type:"object", 
 		className:objectType, 
-		reference:objectReference, 
-		properties:propertyCount, 
+		reference:parseInt(objectReference),
+		properties:parseInt(propertyCount),
 		values:values 
 	};
 }
@@ -328,9 +328,9 @@ null = "NULL"
 recursion = "*RECURSION*" 
 { 
 	return { 
-		type: "RECURSION", 
-		value: "recursion" 
-	}; 
+		type: "recursion",
+		value: "RECURSION"
+	};
 }
 
 variable = varaibleNameFirst:[a-zA-Z_\x7f-\xff] variableNameOthers:[a-zA-Z0-9_\x7f-\xff]* 

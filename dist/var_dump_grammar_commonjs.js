@@ -156,8 +156,8 @@ function peg$parse(input, options) {
       	return {
       		type:"object", 
       		className:objectType, 
-      		reference:objectReference, 
-      		properties:propertyCount, 
+      		reference:parseInt(objectReference),
+      		properties:parseInt(propertyCount),
       		values:values 
       	};
       },
@@ -384,9 +384,9 @@ function peg$parse(input, options) {
       peg$c120 = peg$literalExpectation("*RECURSION*", false),
       peg$c121 = function() { 
       	return { 
-      		type: "RECURSION", 
-      		value: "recursion" 
-      	}; 
+      		type: "recursion",
+      		value: "RECURSION"
+      	};
       },
       peg$c122 = /^[a-zA-Z_\x7F-\xFF]/,
       peg$c123 = peg$classExpectation([["a", "z"], ["A", "Z"], "_", ["\x7F", "\xFF"]], false, false),
