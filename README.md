@@ -1,2 +1,2 @@
-# var_dump_grammer
+# var_dump_grammar
 PEG.js grammar for var_dumps
