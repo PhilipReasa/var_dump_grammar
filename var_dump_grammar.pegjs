@@ -225,7 +225,7 @@ string =
 { 
 	return { 
 		type: "string", 
-		length: length, 
+		length: parseInt(length),
 		value: stringValue 
 	};
 }

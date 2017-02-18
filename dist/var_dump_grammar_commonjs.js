@@ -288,7 +288,7 @@ function peg$parse(input, options) {
       peg$c82 = function(length, stringValue) { 
       	return { 
       		type: "string", 
-      		length: length, 
+      		length: parseInt(length),
       		value: stringValue 
       	};
       },
