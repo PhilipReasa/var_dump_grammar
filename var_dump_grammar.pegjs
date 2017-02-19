@@ -11,7 +11,7 @@ start_values = object / array
  *************/
 //example: object(Namespace\foo)#1 (1) { ["key"]=> int(1) }
 object = 
-	object_constant_text "(" objectType:fully_qualified_object_name ")" //object(Namespace\foo)
+	reference:[&]? object_constant_text "(" objectType:fully_qualified_object_name ")" //object(Namespace\foo)
 	"#" objectReference:object_reference ws 							//#1
 	"(" propertyCount:object_field_count ")" ws 						//(1)
 	"{" ws values:object_key_value* ws "}" 								//{ ["key"]=> int(1) }
@@ -21,7 +21,8 @@ object =
 		className:objectType, 
 		referenceId:parseInt(objectReference),
 		properties:parseInt(propertyCount),
-		values:values 
+		values:values,
+		reference: reference === "&"
 	};
 }
 
@@ -105,15 +106,16 @@ object_property_scope =
  ************/
 //example: array(1) { ["key"]=> int(1) }
 array = 
-	ws array_constant_text 				//array
-	"(" count:array_field_count ") {" 	//(1) {
-	values:array_key_value* ws 			//["key"]=> int(1)
-	"}" ws 								//}
+	ws reference:[&]? array_constant_text 				//array
+	"(" count:array_field_count ") {" 	                //(1) {
+	values:array_key_value* ws 			                //["key"]=> int(1)
+	"}" ws 								                //}
 {
 	return {
 		type: "array", 
 		count: parseInt(count),
-		values: values
+		values: values,
+		reference: reference === "&"
 	}
 }
 

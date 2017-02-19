@@ -13,6 +13,7 @@ describe('[RECURSION]', () => {
             },
             properties: 1,
             referenceId: 1,
+            reference: false,
             values: [
                 {
                     property: {

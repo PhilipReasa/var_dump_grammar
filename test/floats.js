@@ -8,6 +8,7 @@ describe('[FLOATS]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 6,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -62,6 +63,7 @@ describe('[FLOATS]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 6,
+            reference: false,
             values: [
                 {
                     key: 0,

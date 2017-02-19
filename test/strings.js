@@ -8,6 +8,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -28,6 +29,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -48,6 +50,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -68,6 +71,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -88,6 +92,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -108,6 +113,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -128,6 +134,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -148,6 +155,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -168,6 +176,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -188,6 +197,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -208,6 +218,7 @@ describe('[STRING]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 1,
+            reference: false,
             values: [
                 {
                     key: 0,

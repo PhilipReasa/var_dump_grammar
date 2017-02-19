@@ -8,6 +8,7 @@ describe('[RESOURCE]', () => {
         expect(parse(dump)).to.be.deep.equal({
             type: 'array',
             count: 6,
+            reference: false,
             values: [
                 {
                     key: 0,

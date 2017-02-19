@@ -8,6 +8,7 @@ describe('[INTEGERS]', () => {
         expect(parse(test)).to.be.deep.equal({
             type: 'array',
             count: 4,
+            reference: false,
             values: [
                 {
                     key: 0,
@@ -48,6 +49,7 @@ describe('[INTEGERS]', () => {
         expect(parse(test)).to.be.deep.equal({
             type: 'array',
             count: 4,
+            reference: false,
             values: [
                 {
                     key: 0,
