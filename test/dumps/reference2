@@ -1,0 +1,48 @@
+object(foo)#1 (20) {
+  ["normalString"]=&gt;
+  string(29) "normal string (no references)"
+  ["normalInt"]=&gt;
+  int(1)
+  ["normalFloat"]=&gt;
+  float(1.01)
+  ["normalBool"]=&gt;
+  bool(false)
+  ["normalArray"]=&gt;
+  array(0) {
+  }
+  ["normalObject"]=&gt;
+  object(stdClass)#2 (0) {
+  }
+  ["string"]=&gt;
+  &string(11) "test string"
+  ["stringReference"]=&gt;
+  &string(11) "test string"
+  ["int"]=&gt;
+  &int(1)
+  ["intReference"]=&gt;
+  &int(1)
+  ["float"]=&gt;
+  &float(1.01)
+  ["floatReference"]=&gt;
+  &float(1.01)
+  ["bool"]=&gt;
+  &bool(false)
+  ["boolReference"]=&gt;
+  &bool(false)
+  ["null"]=&gt;
+  &NULL
+  ["nullReference"]=&gt;
+  &NULL
+  ["array"]=&gt;
+  &array(0) {
+  }
+  ["arrayReference"]=&gt;
+  &array(0) {
+  }
+  ["object"]=&gt;
+  &object(stdClass)#3 (0) {
+  }
+  ["objectReference"]=&gt;
+  &object(stdClass)#3 (0) {
+  }
+}

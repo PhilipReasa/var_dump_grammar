@@ -11,7 +11,7 @@ start_values = object / array
  *************/
 //example: object(Namespace\foo)#1 (1) { ["key"]=> int(1) }
 object = 
-	object_constant_text "(" objectType:fully_qualified_object_name ")" //object(Namespace\foo)
+	reference:[&]? object_constant_text "(" objectType:fully_qualified_object_name ")" //object(Namespace\foo)
 	"#" objectReference:object_reference ws 							//#1
 	"(" propertyCount:object_field_count ")" ws 						//(1)
 	"{" ws values:object_key_value* ws "}" 								//{ ["key"]=> int(1) }
@@ -19,9 +19,10 @@ object =
 	return {
 		type:"object", 
 		className:objectType, 
-		reference:objectReference, 
-		properties:propertyCount, 
-		values:values 
+		referenceId:parseInt(objectReference),
+		properties:parseInt(propertyCount),
+		values:values,
+		reference: reference === "&"
 	};
 }
 
@@ -105,15 +106,16 @@ object_property_scope =
  ************/
 //example: array(1) { ["key"]=> int(1) }
 array = 
-	ws array_constant_text 				//array
-	"(" count:array_field_count ") {" 	//(1) {
-	values:array_key_value* ws 			//["key"]=> int(1)
-	"}" ws 								//}
+	ws reference:[&]? array_constant_text 				//array
+	"(" count:array_field_count ") {" 	                //(1) {
+	values:array_key_value* ws 			                //["key"]=> int(1)
+	"}" ws 								                //}
 {
 	return {
 		type: "array", 
-		count: count, 
-		values: values
+		count: parseInt(count),
+		values: values,
+		reference: reference === "&"
 	}
 }
 
@@ -213,20 +215,22 @@ primitives = string
 	/ float
 	/ null
     / recursion
+    / resource
 
 /**************
  * Strings
  **************/
 //strings provide some extra data: string(length) "value"
 string = 
-	ws string_constant_text 			//string
+	ws reference:[&]? string_constant_text 			//string
 	"(" length:string_length ")" 		//(1)
 	ws stringValue:regular_string ws 	//"a"
 { 
 	return { 
 		type: "string", 
-		length: length, 
-		value: stringValue 
+		length: parseInt(length),
+		value: stringValue,
+		reference: reference === "&"
 	};
 }
 
@@ -281,31 +285,34 @@ string_chars_type3 = values:[^\"]+
  ****************/
 boolean = TRUE / FALSE
 
-TRUE = "bool(true)" 
+TRUE = reference:[&]? "bool(true)"
 { 
 	return {
 		type:"boolean", 
-		value: true
+		value: true,
+		reference: reference === "&"
 	}; 
 }
 
-FALSE = "bool(false)" 
+FALSE = reference:[&]? "bool(false)"
 { 
 	return {
 		type:"boolean", 
-		value: false
+		value: false,
+        reference: reference === "&"
 	}; 
 }
 
-integer = "int(" sign:"-"? number:simple_number ")" 
+integer = reference:[&]? "int(" sign:"-"? number:simple_number ")"
 { 
 	return { 
 		type:"integer", 
-		value: parseInt((sign || "") + number) 
+		value: parseInt((sign || "") + number),
+		reference: reference === "&"
 	} 
 }
 
-float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* sientificNotation:"E"? sientificNotationSign:[+\-]? sientificNotationDignits:[0-9]* ")" 
+float = reference:[&]? "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* sientificNotation:"E"? sientificNotationSign:[+\-]? sientificNotationDignits:[0-9]* ")"
 { 
 	var value = parseFloat((sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join(''));
 	if(sientificNotation) {
@@ -313,24 +320,36 @@ float = "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* sien
 	}
 	return { 
 		type:"float", 
-		value: value
+		value: value,
+		reference: reference === "&"
 	}; 
 }
 
-null = "NULL" 
+null = reference:[&]? "NULL"
 { 
 	return { 
 		type: "null", 
-		value: "NULL" 
+		value: "NULL",
+		reference: reference === "&"
 	}; 
 }
 
-recursion = "*RECURSION*" 
+recursion = "*RECURSION*"
 { 
 	return { 
-		type: "RECURSION", 
-		value: "recursion" 
-	}; 
+		type: "recursion",
+		value: "RECURSION"
+	};
+}
+
+resource = reference:[&]? "resource(" referenceId:[0-9]+ ") of type (" type:[^\)]+ ")"
+{
+    return {
+        type: "resource",
+        value: type.join(''),
+        referenceId: parseInt(referenceId.join('')),
+        reference: reference === "&"
+    }
 }
 
 variable = varaibleNameFirst:[a-zA-Z_\x7f-\xff] variableNameOthers:[a-zA-Z0-9_\x7f-\xff]* 
