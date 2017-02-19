@@ -13,7 +13,8 @@ describe('[NULLS]', () => {
                     key: 0,
                     value: {
                         type: 'null',
-                        value: 'NULL'
+                        value: 'NULL',
+                        reference: false
                     }
                 }
             ]

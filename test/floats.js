@@ -13,37 +13,43 @@ describe('[FLOATS]', () => {
                     key: 0,
                     value: {
                         type: 'float',
-                        value: 0
+                        value: 0,
+                        reference: false
                     }
                 }, {
                     key: 1,
                     value: {
                         type: 'float',
-                        value: 1
+                        value: 1,
+                        reference: false
                     }
                 }, {
                     key: 2,
                     value: {
                         type: 'float',
-                        value: 1.00001
+                        value: 1.00001,
+                        reference: false
                     }
                 }, {
                     key: 3,
                     value: {
                         type: 'float',
-                        value: "1.2E-15"
+                        value: "1.2E-15",
+                        reference: false
                     }
                 }, {
                     key: 4,
                     value: {
                         type: 'float',
-                        value: '1.0000000000128E+26'
+                        value: '1.0000000000128E+26',
+                        reference: false
                     }
                 }, {
                     key: 5,
                     value: {
                         type: 'float',
-                        value: 12318.1238
+                        value: 12318.1238,
+                        reference: false
                     }
                 }
             ]
@@ -61,37 +67,43 @@ describe('[FLOATS]', () => {
                     key: 0,
                     value: {
                         type: 'float',
-                        value: -0 // yes, JS has -0 (vs +0)
+                        value: -0, // yes, JS has -0 (vs +0)
+                        reference: false
                     }
                 }, {
                     key: 1,
                     value: {
                         type: 'float',
-                        value: -1
+                        value: -1,
+                        reference: false
                     }
                 }, {
                     key: 2,
                     value: {
                         type: 'float',
-                        value: -1.00001
+                        value: -1.00001,
+                        reference: false
                     }
                 }, {
                     key: 3,
                     value: {
                         type: 'float',
-                        value: "-1.2E-15"
+                        value: "-1.2E-15",
+                        reference: false
                     }
                 }, {
                     key: 4,
                     value: {
                         type: 'float',
-                        value: '-1.0000000000128E+26'
+                        value: '-1.0000000000128E+26',
+                        reference: false
                     }
                 }, {
                     key: 5,
                     value: {
                         type: 'float',
-                        value: -12318.1238
+                        value: -12318.1238,
+                        reference: false
                     }
                 }
             ]

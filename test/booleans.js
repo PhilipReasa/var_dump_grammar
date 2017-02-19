@@ -1,7 +1,7 @@
 const parse = require('../dist/var_dump_grammar_commonjs').parse
 const expect = require('chai').expect
 
-describe('[FLOATS]', () => {
+describe('[BOOLEANS]', () => {
     it('handles true', () => {
         const dump = dumps['boolean1']
 
@@ -13,7 +13,8 @@ describe('[FLOATS]', () => {
                     key: 0,
                     value: {
                         type: 'boolean',
-                        value: true
+                        value: true,
+                        reference: false
                     }
                 }
             ]
@@ -31,7 +32,8 @@ describe('[FLOATS]', () => {
                     key: 0,
                     value: {
                         type: 'boolean',
-                        value: false
+                        value: false,
+                        reference: false
                     }
                 }
             ]

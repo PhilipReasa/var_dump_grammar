@@ -13,25 +13,29 @@ describe('[INTEGERS]', () => {
                     key: 0,
                     value: {
                         type: 'integer',
-                        value: 0
+                        value: 0,
+                        reference: false
                     }
                 }, {
                     key: 1,
                     value: {
                         type: 'integer',
-                        value: 100
+                        value: 100,
+                        reference: false
                     }
                 }, {
                     key: 2,
                     value: {
                         type: 'integer',
-                        value: 1000000000
+                        value: 1000000000,
+                        reference: false
                     }
                 }, {
                     key: 3,
                     value: {
                         type: 'integer',
-                        value: 10000000000123
+                        value: 10000000000123,
+                        reference: false
                     }
                 }
             ]
@@ -49,25 +53,29 @@ describe('[INTEGERS]', () => {
                     key: 0,
                     value: {
                         type: 'integer',
-                        value: 0
+                        value: 0,
+                        reference: false
                     }
                 }, {
                     key: 1,
                     value: {
                         type: 'integer',
-                        value: -100
+                        value: -100,
+                        reference: false
                     }
                 }, {
                     key: 2,
                     value: {
                         type: 'integer',
-                        value: -1000000000
+                        value: -1000000000,
+                        reference: false
                     }
                 }, {
                     key: 3,
                     value: {
                         type: 'integer',
-                        value: -10000000000123
+                        value: -10000000000123,
+                        reference: false
                     }
                 }
             ]

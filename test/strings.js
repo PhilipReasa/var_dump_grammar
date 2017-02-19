@@ -14,7 +14,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 0,
-                        value: ""
+                        value: "",
+                        reference: false
                     }
                 }
             ]
@@ -33,7 +34,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 1,
-                        value: "a"
+                        value: "a",
+                        reference: false
                     }
                 }
             ]
@@ -52,7 +54,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 1,
-                        value: "\""
+                        value: "\"",
+                        reference: false
                     }
                 }
             ]
@@ -71,7 +74,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 1,
-                        value: "\'"
+                        value: "\'",
+                        reference: false
                     }
                 }
             ]
@@ -90,7 +94,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 49,
-                        value: "<a href='http://sampleLink.com/#/sample'>link</a>"
+                        value: "<a href='http://sampleLink.com/#/sample'>link</a>",
+                        reference: false
                     }
                 }
             ]
@@ -109,7 +114,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 24,
-                        value: "first-word\n second-word"
+                        value: "first-word\n second-word",
+                        reference: false
                     }
                 }
             ]
@@ -128,7 +134,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 12,
-                        value: "first-word \n"
+                        value: "first-word \n",
+                        reference: false
                     }
                 }
             ]
@@ -147,7 +154,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 1,
-                        value: "\n"
+                        value: "\n",
+                        reference: false
                     }
                 }
             ]
@@ -166,7 +174,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 2,
-                        value: "\n "
+                        value: "\n ",
+                        reference: false
                     }
                 }
             ]
@@ -185,7 +194,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 37,
-                        value: "\"\n\n\"\"\"\nthere should be something here"
+                        value: "\"\n\n\"\"\"\nthere should be something here",
+                        reference: false
                     }
                 }
             ]
@@ -204,7 +214,8 @@ describe('[STRING]', () => {
                     value: {
                         type: 'string',
                         length: 36,
-                        value: "мультфильм, комедия"
+                        value: "мультфильм, комедия",
+                        reference: false
                     }
                 }
             ]

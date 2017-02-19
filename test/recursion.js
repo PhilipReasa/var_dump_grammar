@@ -12,7 +12,7 @@ describe('[RECURSION]', () => {
                 namespace: []
             },
             properties: 1,
-            reference: 1,
+            referenceId: 1,
             values: [
                 {
                     property: {

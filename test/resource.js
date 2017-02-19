@@ -13,43 +13,49 @@ describe('[RESOURCE]', () => {
                     key: 0,
                     value: {
                         type: 'resource',
-                        reference: 4,
-                        value: 'curl'
+                        referenceId: 4,
+                        value: 'curl',
+                        reference: false
                     }
                 }, {
                     key: 1,
                     value: {
                         type: 'resource',
-                        reference: 5,
-                        value: 'stream'
+                        referenceId: 5,
+                        value: 'stream',
+                        reference: false
                     }
                 }, {
                     key: 2,
                     value: {
                         type: 'resource',
-                        reference: 6,
-                        value: 'gd'
+                        referenceId: 6,
+                        value: 'gd',
+                        reference: false
                     }
                 }, {
                     key: 3,
                     value: {
                         type: 'resource',
-                        reference: 8,
-                        value: 'sockets i/o vector'
+                        referenceId: 8,
+                        value: 'sockets i/o vector',
+                        reference: false
                     }
                 }, {
                     key: 4,
                     value: {
                         type: 'resource',
-                        reference: 10,
-                        value: 'zlib.inflate'
+                        referenceId: 10,
+                        value: 'zlib.inflate',
+                        reference: false
                     }
                 }, {
                     key: 5,
                     value: {
                         type: 'resource',
-                        reference: 12,
-                        value: 'mysql link persistent'
+                        referenceId: 12,
+                        value: 'mysql link persistent',
+                        reference: false
                     }
                 }
             ]
