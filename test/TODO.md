@@ -1,4 +1,3 @@
 * Objects
 * Arrays
 * References
-* Resources

@@ -1,0 +1,14 @@
+array(6) {
+  [0]=&gt;
+  resource(4) of type (curl)
+  [1]=&gt;
+  resource(5) of type (stream)
+  [2]=&gt;
+  resource(6) of type (gd)
+  [3]=&gt;
+  resource(8) of type (sockets i/o vector)
+  [4]=&gt;
+  resource(10) of type (zlib.inflate)
+  [5]=&gt;
+  resource(12) of type (mysql link persistent)
+}

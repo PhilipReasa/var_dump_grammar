@@ -213,6 +213,7 @@ primitives = string
 	/ float
 	/ null
     / recursion
+    / resource
 
 /**************
  * Strings
@@ -331,6 +332,15 @@ recursion = "*RECURSION*"
 		type: "recursion",
 		value: "RECURSION"
 	};
+}
+
+resource = "resource(" reference:[0-9]+ ") of type (" type:[^\)]+ ")"
+{
+    return {
+        type: "resource",
+        value: type.join(''),
+        reference: parseInt(reference.join(''))
+    }
 }
 
 variable = varaibleNameFirst:[a-zA-Z_\x7f-\xff] variableNameOthers:[a-zA-Z0-9_\x7f-\xff]* 
