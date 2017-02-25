@@ -11,7 +11,7 @@ start_values = object / array
  *************/
 //example: object(Namespace\foo)#1 (1) { ["key"]=> int(1) }
 object = 
-	reference:[&]? object_constant_text "(" objectType:fully_qualified_object_name ")" //object(Namespace\foo)
+	reference:"&amp;"? object_constant_text "(" objectType:fully_qualified_object_name ")" //object(Namespace\foo)
 	"#" objectReference:object_reference ws 							//#1
 	"(" propertyCount:object_field_count ")" ws 						//(1)
 	"{" ws values:object_key_value* ws "}" 								//{ ["key"]=> int(1) }
@@ -22,7 +22,7 @@ object =
 		referenceId:parseInt(objectReference),
 		properties:parseInt(propertyCount),
 		values:values,
-		reference: reference === "&"
+		reference: reference === "&amp;"
 	};
 }
 
@@ -106,7 +106,7 @@ object_property_scope =
  ************/
 //example: array(1) { ["key"]=> int(1) }
 array = 
-	ws reference:[&]? array_constant_text 				//array
+	ws reference:"&amp;"? array_constant_text 				//array
 	"(" count:array_field_count ") {" 	                //(1) {
 	values:array_key_value* ws 			                //["key"]=> int(1)
 	"}" ws 								                //}
@@ -115,7 +115,7 @@ array =
 		type: "array", 
 		count: parseInt(count),
 		values: values,
-		reference: reference === "&"
+		reference: reference === "&amp;"
 	}
 }
 
@@ -222,7 +222,7 @@ primitives = string
  **************/
 //strings provide some extra data: string(length) "value"
 string = 
-	ws reference:[&]? string_constant_text 			//string
+	ws reference:"&amp;"? string_constant_text 			//string
 	"(" length:string_length ")" 		//(1)
 	ws stringValue:regular_string ws 	//"a"
 { 
@@ -230,7 +230,7 @@ string =
 		type: "string", 
 		length: parseInt(length),
 		value: stringValue,
-		reference: reference === "&"
+		reference: reference === "&amp;"
 	};
 }
 
@@ -285,34 +285,34 @@ string_chars_type3 = values:[^\"]+
  ****************/
 boolean = TRUE / FALSE
 
-TRUE = reference:[&]? "bool(true)"
+TRUE = reference:"&amp;"? "bool(true)"
 { 
 	return {
 		type:"boolean", 
 		value: true,
-		reference: reference === "&"
+		reference: reference === "&amp;"
 	}; 
 }
 
-FALSE = reference:[&]? "bool(false)"
+FALSE = reference:"&amp;"? "bool(false)"
 { 
 	return {
 		type:"boolean", 
 		value: false,
-        reference: reference === "&"
+        reference: reference === "&amp;"
 	}; 
 }
 
-integer = reference:[&]? "int(" sign:"-"? number:simple_number ")"
+integer = reference:"&amp;"? "int(" sign:"-"? number:simple_number ")"
 { 
 	return { 
 		type:"integer", 
 		value: parseInt((sign || "") + number),
-		reference: reference === "&"
+		reference: reference === "&amp;"
 	} 
 }
 
-float = reference:[&]? "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* sientificNotation:"E"? sientificNotationSign:[+\-]? sientificNotationDignits:[0-9]* ")"
+float = reference:"&amp;"? "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decimals:[0-9]* sientificNotation:"E"? sientificNotationSign:[+\-]? sientificNotationDignits:[0-9]* ")"
 { 
 	var value = parseFloat((sign || "") + numbers.join('') + (decimalPoint || "") + decimals.join(''));
 	if(sientificNotation) {
@@ -321,16 +321,16 @@ float = reference:[&]? "float(" sign:"-"? numbers:[0-9]+ decimalPoint:"."? decim
 	return { 
 		type:"float", 
 		value: value,
-		reference: reference === "&"
+		reference: reference === "&amp;"
 	}; 
 }
 
-null = reference:[&]? "NULL"
+null = reference:"&amp;"? "NULL"
 { 
 	return { 
 		type: "null", 
 		value: "NULL",
-		reference: reference === "&"
+		reference: reference === "&amp;"
 	}; 
 }
 
@@ -342,13 +342,13 @@ recursion = "*RECURSION*"
 	};
 }
 
-resource = reference:[&]? "resource(" referenceId:[0-9]+ ") of type (" type:[^\)]+ ")"
+resource = reference:"&amp;"? "resource(" referenceId:[0-9]+ ") of type (" type:[^\)]+ ")"
 {
     return {
         type: "resource",
         value: type.join(''),
         referenceId: parseInt(referenceId.join('')),
-        reference: reference === "&"
+        reference: reference === "&amp;"
     }
 }
 

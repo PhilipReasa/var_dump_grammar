@@ -2,5 +2,5 @@ array(2) {
   [0]=&gt;
   string(11) "test string"
   [1]=&gt;
-  &string(11) "test string"
+  &amp;string(11) "test string"
 }

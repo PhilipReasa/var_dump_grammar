@@ -1,0 +1,4 @@
+array(1) {
+  [0]=&gt;
+  string(186) "O:3:"foo":6:{s:12:"normalString";s:29:"normal string (no references)";s:9:"normalInt";i:1;s:11:"normalFloat";d:1.01;s:10:"normalBool";b:0;s:11:"normalArray";a:0:{}s:12:"normalObject";N;}"
+}
