@@ -16,12 +16,7 @@ describe('[RECURSION]', () => {
             reference: false,
             values: [
                 {
-                    property: {
-                        propertyChain: [
-                            'selfReference'
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'selfReference',
                     value: {
                         type: 'recursion',
                         value: 'RECURSION'
