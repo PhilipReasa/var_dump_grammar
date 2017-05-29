@@ -1,0 +1,6 @@
+object(foo)#1 (2) {
+    ["thumbnail-width"]=&gt;
+    int(10)
+    ["@sign"]=&gt;
+    int(1)
+}

@@ -45,12 +45,7 @@ describe('[REFERENCE]', () => {
             reference: false,
             values: [
                 {
-                    property:  {
-                        propertyChain: [
-                            "normalString"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'normalString',
                     value: {
                         length: 29,
                         type: 'string',
@@ -58,48 +53,28 @@ describe('[REFERENCE]', () => {
                         reference: false
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "normalInt"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'normalInt',
                     value: {
                         type: 'integer',
                         value: 1,
                         reference: false
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "normalFloat"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'normalFloat',
                     value: {
                         type: 'float',
                         value: 1.01,
                         reference: false
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "normalBool"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'normalBool',
                     value: {
                         type: 'boolean',
                         value: false,
                         reference: false
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "normalArray"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'normalArray',
                     value: {
                         count: 0,
                         type: 'array',
@@ -107,12 +82,7 @@ describe('[REFERENCE]', () => {
                         reference: false
                     }
                 }, {
-                    property: {
-                        propertyChain: [
-                            "normalObject"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'normalObject',
                     value: {
                         properties: 0,
                         referenceId: 2,
@@ -125,12 +95,7 @@ describe('[REFERENCE]', () => {
                         reference: false
                     }
                 }, {
-                    property: {
-                        propertyChain: [
-                            "string"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'string',
                     value: {
                         length: 11,
                         type: 'string',
@@ -138,12 +103,7 @@ describe('[REFERENCE]', () => {
                         reference: true
                     }
                 }, {
-                    property: {
-                        propertyChain: [
-                            "stringReference"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'stringReference',
                     value: {
                         length: 11,
                         type: 'string',
@@ -151,108 +111,63 @@ describe('[REFERENCE]', () => {
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "int"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'int',
                     value: {
                         type: 'integer',
                         value: 1,
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "intReference"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'intReference',
                     value: {
                         type: 'integer',
                         value: 1,
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "float"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'float',
                     value: {
                         type: 'float',
                         value: 1.01,
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "floatReference"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'floatReference',
                     value: {
                         type: 'float',
                         value: 1.01,
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "bool"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'bool',
                     value: {
                         type: 'boolean',
                         value: false,
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "boolReference"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'boolReference',
                     value: {
                         type: 'boolean',
                         value: false,
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "null"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'null',
                     value: {
                         type: 'null',
                         value: 'NULL',
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "nullReference"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'nullReference',
                     value: {
                         type: 'null',
                         value: 'NULL',
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "array"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'array',
                     value: {
                         count: 0,
                         type: 'array',
@@ -260,12 +175,7 @@ describe('[REFERENCE]', () => {
                         reference: true
                     }
                 }, {
-                    property:  {
-                        propertyChain: [
-                            "arrayReference"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'arrayReference',
                     value: {
                         count: 0,
                         type: 'array',
@@ -273,12 +183,7 @@ describe('[REFERENCE]', () => {
                         reference: true
                     }
                 }, {
-                    property: {
-                        propertyChain: [
-                            "object"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'object',
                     value: {
                         properties: 0,
                         referenceId: 3,
@@ -291,12 +196,7 @@ describe('[REFERENCE]', () => {
                         reference: true
                     }
                 }, {
-                    property: {
-                        propertyChain: [
-                            "objectReference"
-                        ],
-                        propertyScope: null
-                    },
+                    key: 'objectReference',
                     value: {
                         properties: 0,
                         referenceId: 3,
