@@ -14,7 +14,7 @@ object =
 	reference:"&amp;"? object_constant_text "(" objectType:fully_qualified_object_name ")"  //object(Namespace\foo)
 	"#" objectReference:object_reference ws 							                    //#1
 	"(" propertyCount:object_field_count ")" ws 						                    //(1)
-	"{" ws values:key_value* ws "}" 								                        //{ ["key"]=> int(1) }
+	"{" ws values:object_key_value* ws "}" 								                        //{ ["key"]=> int(1) }
 { 
 	return {
 		type:"object", 
@@ -54,6 +54,53 @@ object_reference = simple_number
 
 object_field_count = simple_number
 
+object_key_value =
+    ws key:object_key
+	ws value:value ws
+{
+    return {
+        key: key,
+        value: value
+    }
+}
+
+object_key =
+	object_key_number /
+    object_key_string
+
+// yes this is hard to make happen, no it is not impossible (involves casting to an object)
+object_key_number =
+	"[" 					//[
+	sign:"-"? 				//-
+	number:simple_number 	//1
+	"]=&gt;" 				//]=>
+{
+	return parseInt((sign || "") + number);
+}
+
+object_key_string =
+  	"[" quotation_mark 				//["
+  	chars:[^\"]* 	        //key
+  	quotation_mark+                 //"
+  	scope:object_property_scope?    //:private
+  	"]=&gt;" 		                //]=>
+  {
+  	var toReturn = chars.join("");
+
+  	if (scope !== null) {
+  	    toReturn += scope
+  	}
+
+  	return toReturn;
+  }
+
+object_string_char = [^\"]
+
+object_property_scope =
+  ":private" /
+  ":protected" /
+  ":public"
+
 /************
  * PHP arrays
  ************/
@@ -61,7 +108,7 @@ object_field_count = simple_number
 array = 
 	ws reference:"&amp;"? array_constant_text 			//array
 	"(" count:array_field_count ") {" 	                //(1) {
-	values:key_value* ws 			                    //["key"]=> int(1)
+	values:array_key_value* ws 			                    //["key"]=> int(1)
 	"}" ws 								                //}
 {
 	return {
@@ -76,12 +123,8 @@ array_constant_text = "array"
 
 array_field_count = simple_number
 
-/*************
- * Keys and Values (i.e. ["key"]=&gt; SOME_VALUE
- * Used in both objects are arrays
- *************/
-key_value =
-	ws key:key
+array_key_value =
+	ws key:array_key
 	ws value:value ws
 {
 	return {
@@ -91,71 +134,75 @@ key_value =
 }
 
 //array keys are numbers or strings
-key =
-	key_number /
-    key_string
+array_key =
+	array_key_number /
+    array_key_string
 
 //array key strings are wrapped with quotes
-key_string =
+array_key_string =
 	"[" quotation_mark 				//["
-	chars:key_string_char* 	//key
-	quotation_mark+ "]=&gt;" 		//"]=>
+	chars:key_string_char* 	        //key
+	quotation_mark+                 //"
+	"]=&gt;" 		                //]=>
 {
 	return chars.join("");
 }
 
-key_string_char =
-	key_string_char_type1 /
-	key_string_char_type2 /
-	key_string_char_type3 /
-	key_string_char_type4 /
-	key_string_char_type5 /
-	key_string_char_type6 /
-	key_string_char_type7
-
-key_string_char_type1 = [\"][\]][=][&][g][t] val:[^;]
-{
-	return "\"]=&gt" + val;
-}
-
-key_string_char_type2 = [\"][\]][=][&][g] val:[^t]
-{
-	return "\"]=&g" + val;
-}
-
-key_string_char_type3 = [\"][\]][=][&] val:[^g]
-{
-	return "\"]=&" + val;
-}
-
-key_string_char_type4 = [\"][\]][=] val:[^&]
-{
-	return "\"]=" + val;
-}
-
-key_string_char_type5 = [\"][\]] val:[^=]
-{
-	return "\"]" + val;
-}
-
-key_string_char_type6 = [\"] val:[^\]]
-{
-	return "\"" + val;
-}
-
-key_string_char_type7 = values:[^\"]+
-{
-	return values.join('');
-}
-
 //array index's can be any integer
-key_number =
+array_key_number =
 	"[" 					//[
 	sign:"-"? 				//-
 	number:simple_number 	//1
 	"]=&gt;" 				//]=>
 {
 	return parseInt((sign || "") + number);
+}
+
+/*************
+ * Shared between objects and arrays
+ *************/
+key_string_char =
+ 	key_string_char_type1 /
+ 	key_string_char_type2 /
+ 	key_string_char_type3 /
+ 	key_string_char_type4 /
+ 	key_string_char_type5 /
+ 	key_string_char_type6 /
+ 	key_string_char_type7
+
+key_string_char_type1 = [\"][\]][=][&][g][t] val:[^;]
+{
+    return "\"]=&gt" + val;
+}
+
+key_string_char_type2 = [\"][\]][=][&][g] val:[^t]
+{
+ 	return "\"]=&g" + val;
+}
+
+key_string_char_type3 = [\"][\]][=][&] val:[^g]
+{
+ 	return "\"]=&" + val;
+}
+
+key_string_char_type4 = [\"][\]][=] val:[^&]
+{
+ 	return "\"]=" + val;
+}
+
+key_string_char_type5 = [\"][\]] val:[^=]
+{
+ 	return "\"]" + val;
+}
+
+key_string_char_type6 = [\"] val:[^\]]
+{
+ 	return "\"" + val;
+}
+
+key_string_char_type7 = values:[^\"]+
+{
+ 	return values.join('');
 }
 
 /*************

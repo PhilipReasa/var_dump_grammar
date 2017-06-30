@@ -71,4 +71,45 @@ describe('[OBJECTS]', () => {
             ]
         })
     })
+
+    it('handles objects with properties that are scoped (i.e. private)', () => {
+        const dump = dumps['objects3']
+
+        expect(parse(dump)).to.be.deep.equal({
+            type: 'object',
+            properties: 3,
+            className: {
+                class: "DataObject",
+                namespace: []
+            },
+            referenceId: 1,
+            reference: false,
+            values: [
+                {
+                    key: '_data:private',
+                    value: {
+                        type: 'null',
+                        value: 'NULL',
+                        reference: false
+                    }
+                },
+                {
+                    key: 'data2:protected',
+                    value: {
+                        type: 'integer',
+                        value: 1,
+                        reference: false
+                    }
+                },
+                {
+                    key: 'Data3:public',
+                    value: {
+                        type: 'float',
+                        value: 1.0,
+                        reference: false
+                    }
+                }
+            ]
+        })
+    })
 })
