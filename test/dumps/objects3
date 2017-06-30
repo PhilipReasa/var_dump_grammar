@@ -1,0 +1,8 @@
+object(DataObject)#1 (3) {
+    ["_data":private]=&gt;
+    NULL
+    ["data2":protected]=&gt;
+    int(1)
+    ["Data3":public]=&gt;
+    float(1)
+}
