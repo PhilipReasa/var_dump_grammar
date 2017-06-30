@@ -94,8 +94,6 @@ object_key_string =
   	return toReturn;
   }
 
-object_string_char = [^\"]
-
 object_property_scope =
   ":private" /
   ":protected" /
