@@ -136,16 +136,6 @@ array_key =
 	array_key_number /
     array_key_string
 
-//array key strings are wrapped with quotes
-array_key_string =
-	"[" quotation_mark 				//["
-	chars:key_string_char* 	        //key
-	quotation_mark+                 //"
-	"]=&gt;" 		                //]=>
-{
-	return chars.join("");
-}
-
 //array index's can be any integer
 array_key_number =
 	"[" 					//[
@@ -156,49 +146,56 @@ array_key_number =
 	return parseInt((sign || "") + number);
 }
 
-/*************
- * Shared between objects and arrays
- *************/
-key_string_char =
- 	key_string_char_type1 /
- 	key_string_char_type2 /
- 	key_string_char_type3 /
- 	key_string_char_type4 /
- 	key_string_char_type5 /
- 	key_string_char_type6 /
- 	key_string_char_type7
+//array key strings are wrapped with quotes
+array_key_string =
+	"[" quotation_mark 				//["
+	chars:array_key_string_char* 	        //key
+	quotation_mark+                 //"
+	"]=&gt;" 		                //]=>
+{
+	return chars.join("");
+}
 
-key_string_char_type1 = [\"][\]][=][&][g][t] val:[^;]
+array_key_string_char =
+ 	array_key_string_char_type1 /
+ 	array_key_string_char_type2 /
+ 	array_key_string_char_type3 /
+ 	array_key_string_char_type4 /
+ 	array_key_string_char_type5 /
+ 	array_key_string_char_type6 /
+ 	array_key_string_char_type7
+
+array_key_string_char_type1 = [\"][\]][=][&][g][t] val:[^;]
 {
     return "\"]=&gt" + val;
 }
 
-key_string_char_type2 = [\"][\]][=][&][g] val:[^t]
+array_key_string_char_type2 = [\"][\]][=][&][g] val:[^t]
 {
  	return "\"]=&g" + val;
 }
 
-key_string_char_type3 = [\"][\]][=][&] val:[^g]
+array_key_string_char_type3 = [\"][\]][=][&] val:[^g]
 {
  	return "\"]=&" + val;
 }
 
-key_string_char_type4 = [\"][\]][=] val:[^&]
+array_key_string_char_type4 = [\"][\]][=] val:[^&]
 {
  	return "\"]=" + val;
 }
 
-key_string_char_type5 = [\"][\]] val:[^=]
+array_key_string_char_type5 = [\"][\]] val:[^=]
 {
  	return "\"]" + val;
 }
 
-key_string_char_type6 = [\"] val:[^\]]
+array_key_string_char_type6 = [\"] val:[^\]]
 {
  	return "\"" + val;
 }
 
-key_string_char_type7 = values:[^\"]+
+array_key_string_char_type7 = values:[^\"]+
 {
  	return values.join('');
 }
