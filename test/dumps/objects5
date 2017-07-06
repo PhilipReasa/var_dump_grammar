@@ -1,0 +1,4 @@
+object(DataObject)#1 (1) {
+    ["_runner":"CConsoleApplication":private]=&gt;
+    string(1) "a"
+}
