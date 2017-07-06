@@ -112,4 +112,56 @@ describe('[OBJECTS]', () => {
             ]
         })
     })
+
+    it('handles objects with properties that are nested (i.e. ["prop1":"prop2"])', () => {
+        const dump = dumps['objects4']
+
+        expect(parse(dump)).to.be.deep.equal({
+            type: 'object',
+            properties: 1,
+            className: {
+                class: "DataObject",
+                namespace: []
+            },
+            referenceId: 1,
+            reference: false,
+            values: [
+                {
+                    key: '_runner:CConsoleApplication',
+                    value: {
+                        type: 'string',
+                        value: 'a',
+                        length: 1,
+                        reference: false
+                    }
+                }
+            ]
+        })
+    })
+
+    it('handles objects with properties that are nested and scoped', () => {
+        const dump = dumps['objects5']
+
+        expect(parse(dump)).to.be.deep.equal({
+            type: 'object',
+            properties: 1,
+            className: {
+                class: "DataObject",
+                namespace: []
+            },
+            referenceId: 1,
+            reference: false,
+            values: [
+                {
+                    key: '_runner:CConsoleApplication:private',
+                    value: {
+                        type: 'string',
+                        value: 'a',
+                        length: 1,
+                        reference: false
+                    }
+                }
+            ]
+        })
+    })
 })

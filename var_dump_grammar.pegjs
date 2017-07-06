@@ -80,7 +80,7 @@ object_key_number =
 
 object_key_string =
   	"[" quotation_mark 				//["
-  	chars:[^\"]* 	        //key
+  	chars:object_key_string_char+   //key
   	quotation_mark+                 //"
   	scope:object_property_scope?    //:private
   	"]=&gt;" 		                //]=>
@@ -98,6 +98,21 @@ object_property_scope =
   ":private" /
   ":protected" /
   ":public"
+
+object_key_string_char =
+    object_key_string_char_type1 /
+    object_key_string_char_type2
+
+object_key_string_char_type1 = [\"][\:][\"]
+{
+ 	return ':'
+}
+
+object_key_string_char_type2 = values:[^\"]+
+{
+ 	return values.join('');
+}
+
 
 /************
  * PHP arrays
