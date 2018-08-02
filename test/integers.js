@@ -5,7 +5,7 @@ describe('[INTEGERS]', () => {
     it('handles positive integers', () => {
         const test = dumps['integer1']
 
-        expect(parse(test)).to.be.deep.equal({
+        expect(parse(test)).to.be.deep.equal([{
             type: 'array',
             count: 4,
             reference: false,
@@ -40,13 +40,13 @@ describe('[INTEGERS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles negative integers', () => {
         const test = dumps['integer2']
 
-        expect(parse(test)).to.be.deep.equal({
+        expect(parse(test)).to.be.deep.equal([{
             type: 'array',
             count: 4,
             reference: false,
@@ -81,6 +81,6 @@ describe('[INTEGERS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })

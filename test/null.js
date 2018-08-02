@@ -5,7 +5,7 @@ describe('[NULLS]', () => {
     it('handles null values', () => {
         const dump = dumps['null1']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'array',
             count: 1,
             reference: false,
@@ -19,6 +19,6 @@ describe('[NULLS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })

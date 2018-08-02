@@ -7,7 +7,7 @@ describe('[OBJECTS]', () => {
     it('handles number object keys', () => {
         const dump = dumps['objects1']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'object',
             properties: 2,
             className: {
@@ -36,13 +36,13 @@ describe('[OBJECTS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles objects with illegal key names', () => {
         const dump = dumps['objects2']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'object',
             properties: 2,
             className: {
@@ -69,13 +69,13 @@ describe('[OBJECTS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles objects with properties that are scoped (i.e. private)', () => {
         const dump = dumps['objects3']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'object',
             properties: 3,
             className: {
@@ -110,13 +110,13 @@ describe('[OBJECTS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles objects with properties that are nested (i.e. ["prop1":"prop2"])', () => {
         const dump = dumps['objects4']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'object',
             properties: 1,
             className: {
@@ -136,13 +136,13 @@ describe('[OBJECTS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles objects with properties that are nested and scoped', () => {
         const dump = dumps['objects5']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'object',
             properties: 1,
             className: {
@@ -162,6 +162,6 @@ describe('[OBJECTS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })

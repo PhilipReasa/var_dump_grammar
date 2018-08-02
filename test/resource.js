@@ -5,7 +5,7 @@ describe('[RESOURCE]', () => {
     it('handles resources', () => {
         const dump = dumps['resource1']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'array',
             count: 6,
             reference: false,
@@ -60,6 +60,6 @@ describe('[RESOURCE]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })

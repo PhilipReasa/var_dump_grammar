@@ -1,0 +1,12 @@
+array(1) {
+  [0]=&gt;
+  string(10) "first dump"
+}
+object(SimpleXMLElement)#1 (1) {
+    [0]=&gt;
+    string(11) "middle dump"
+}
+object(SimpleXMLElement)#2 (1) {
+    [0]=&gt;
+    string(9) "last dump"
+}

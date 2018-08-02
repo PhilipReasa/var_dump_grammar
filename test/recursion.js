@@ -5,7 +5,7 @@ describe('[RECURSION]', () => {
     it('handles recursion', () => {
         const dump = dumps['recursion1']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'object',
             className: {
                 class: 'stdClass',
@@ -23,6 +23,6 @@ describe('[RECURSION]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })

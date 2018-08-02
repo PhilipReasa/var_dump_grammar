@@ -5,7 +5,7 @@ describe('[FLOATS]', () => {
     it('handles positive floats', () => {
         const dump = dumps['float1']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'array',
             count: 6,
             reference: false,
@@ -54,13 +54,13 @@ describe('[FLOATS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles negative floats', () => {
         const dump = dumps['float2']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'array',
             count: 6,
             reference: false,
@@ -109,6 +109,6 @@ describe('[FLOATS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })
