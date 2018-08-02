@@ -5,7 +5,7 @@ describe('[REFERENCE]', () => {
     it('handles reference values', () => {
         const dump = dumps['reference1']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'array',
             count: 2,
             reference: false,
@@ -28,13 +28,13 @@ describe('[REFERENCE]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles all types of refernces', () => {
         const dump = dumps['reference2']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'object',
             properties: 20,
             className: {
@@ -211,6 +211,6 @@ describe('[REFERENCE]', () => {
                 }
 
             ]
-        })
+        }])
     })
 })

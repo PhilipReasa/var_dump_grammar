@@ -5,7 +5,7 @@ describe('[BOOLEANS]', () => {
     it('handles true', () => {
         const dump = dumps['boolean1']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'array',
             count: 1,
             reference: false,
@@ -19,13 +19,13 @@ describe('[BOOLEANS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 
     it('handles false', () => {
         const dump = dumps['boolean2']
 
-        expect(parse(dump)).to.be.deep.equal({
+        expect(parse(dump)).to.be.deep.equal([{
             type: 'array',
             count: 1,
             reference: false,
@@ -39,6 +39,6 @@ describe('[BOOLEANS]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })

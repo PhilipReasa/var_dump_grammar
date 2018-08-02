@@ -5,7 +5,7 @@ describe('[SERIALIZED DATA]', () => {
     it('Handles Serialized Data', () => {
         const test = dumps['serialize']
 
-        expect(parse(test)).to.be.deep.equal({
+        expect(parse(test)).to.be.deep.equal([{
             type: 'array',
             count: 1,
             reference: false,
@@ -20,6 +20,6 @@ describe('[SERIALIZED DATA]', () => {
                     }
                 }
             ]
-        })
+        }])
     })
 })

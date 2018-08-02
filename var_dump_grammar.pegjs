@@ -1,7 +1,7 @@
 /**********************
  * The Starting point!
  **********************/
-VAR_DUMP = ws dump:start_values ws {return dump}
+VAR_DUMP = ws dump:start_values+ ws {return dump}
 
 //we only detect objects and arrays (no real point in finding primitives)
 start_values = object / array
@@ -11,7 +11,7 @@ start_values = object / array
  *************/
 //example: object(Namespace\foo)#1 (1) { ["key"]=> int(1) }
 object = 
-	reference:"&amp;"? object_constant_text "(" objectType:fully_qualified_object_name ")"  //object(Namespace\foo)
+	ws reference:"&amp;"? object_constant_text "(" objectType:fully_qualified_object_name ")"  //object(Namespace\foo)
 	"#" objectReference:object_reference ws 							                    //#1
 	"(" propertyCount:object_field_count ")" ws 						                    //(1)
 	"{" ws values:object_key_value* ws "}" 								                        //{ ["key"]=> int(1) }
